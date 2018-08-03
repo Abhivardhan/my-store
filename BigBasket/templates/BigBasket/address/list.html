@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% load staticfiles %}
+{% block content %}
+
+    <div class="container jumbotron" style="margin-top: 20px; width:800px;">
+        {% if address_data %}
+            {% for item in address_data %}
+                <div class="card text-center" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ item.fullname }}</h5>
+                        <p class="card-text"> {{ item.street }}
+                        <p class="card-text"> {{ item.landmark }}
+                        <p class="card-text"> {{ item.city }}
+                        <p class="card-text"> {{ item.state }}
+                        <p class="card-text"> {{ item.country }}
+                        <p class="card-text"> {{ item.pincode }}
+                        <p class="card-text"> {{ item.mobileno }}
+                            <a href="{% url 'BigBasket:make_order' item.id %}" class="btn btn-primary">Deliver to this Address</a>
+                        <br>
+                            <a href="#" class="btn btn-default">Edit</a>
+                            <a href="#" class="btn btn-default">Remove</a>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+            <div class="text-right">
+                <a href="{% url 'BigBasket:add_address' %}">
+                    <button class="btn btn-primary">Add Address</button>
+                </a>
+            </div>
+        {% else %}
+
+            <a href="{% url 'BigBasket:add_address' %}">
+                <button class="btn btn-primary">Add Address</button>
+            </a>
+        {% endif %}
+    </div>
+
+{% endblock %}

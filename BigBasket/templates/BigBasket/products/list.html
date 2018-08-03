@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% load static %}
+{% block title %}
+{% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+{% block content %}
+    <div id="sidebar" style="margin-left: 20px;margin-right: 20px;"><h3>Categories</h3>
+        <ul>
+            <li {% if not category %}class="selected"{% endif %}><a href="{% url "BigBasket:product_list" %}">All</a></li>
+            {% for c in categories %}
+            <li {% if category.slug == c.slug %}class="selected"{% endif %}><a
+            href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>      {% endfor %}
+        </ul>
+    </div>
+    <div id="main" class="product-list" style="margin-top: 10px;"><h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+        {% for product in products %}
+        <div class="item" style="height: 400px;width: 250px;">
+            <a href="{{ product.get_absolute_url }}"><img src="
+        {% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="200px" height="200px;">
+        </a>
+            {{ product.name }}
+{#            <a href="{{ product.get_absolute_url }}">{{ product.name }}</ a>#}
+            <br> ₹ {{ product.price }}
+            <br>
+            <br>
+            <a href="{% url 'BigBasket:checklist_add' product.id %}" >
+                <button class="btn btn-default">Checklist</button>
+            </a>
+            <a href="{% url 'BigBasket:add_to_cart' product.id%}" >
+                <button class="btn btn-primary">Add to Basket</button>
+            </a>
+
+        </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}

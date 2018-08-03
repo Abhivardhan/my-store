@@ -1,0 +1,33 @@
+<head>
+
+</head>
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+
+        {% for index in categories %}
+            <div style="height: 400px; width: auto; border: 1px solid #aaa; margin: 20px 20px;">
+                <h2 style="text-align: center"><a href="#">{{ index.name }}</a></h2>
+
+                {% for element in products %}
+                    {% if  element.category__name == index.name %}
+                        <div style="display: inline-flex; margin: 10px;">
+                            <div class="card" style="width: 14rem;height: 8rem; display: inline-block">
+                                <a href="#"><img class="card-img-top" src="{{ element.image.url }}" alt="Card image cap"></a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ element.name }}</h5>
+                                    <span class="card-text"> <strong>Price : </strong>{{ element.price }}</span>
+                                    <p class="card-text">{{ element.stock }}</p>
+                                    <a href="#" class="btn btn-primary">Add to Basket</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+{% endblock content %}
