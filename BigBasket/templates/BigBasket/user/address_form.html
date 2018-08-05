@@ -3,10 +3,42 @@
 
 {% block content %}
 
-    <form action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit">
-    </form>
+{#    <div class="jumbotron container" style="width: 500px; margin-top: 20px">#}
+{#        <form method="post" class="form-horizontal">#}
+{#            {% csrf_token %}#}
+{#            {{ form.as_p }}#}
+{##}
+{#            <button class="btn btn-default" type="submit">Save</button>#}
+{#        </form>#}
+{#    </div>#}
+
+    <div class="jumbotron container" style="margin-top: 20px">
+    <div>
+        <form method="post" class="form-horizontal">
+            {% csrf_token %}
+            <div class="row">
+
+                <div class="col-lg-5">
+                    <p>Name : {{ form.fullname }}</p>
+                    <p>Street : {{ form.street }}</p>
+                    <p>Landmark : {{ form.landmark }}</p>
+                    <p>City : {{ form.city }}</p>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-5">
+                    <p>Pincode : {{ form.pincode }}</p>
+                    <p>State : {{ form.state }}</p>
+                    <p>Country : {{ form.country }}</p>
+                    <p>Mobile No : {{ form.mobileno }}</p>
+                </div>
+            </div>
+
+            <br>
+            <div class="text-right">
+                <button class="btn btn-primary " type="submit">Save</button>
+            </div>
+        </form>
+        </div>
+    </div>
 
 {% endblock %}

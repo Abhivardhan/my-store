@@ -14,7 +14,7 @@
                     <button class="btn btn-warning " style="margin-left: 470px;">Clear Cart</button>
                 </a>
             </div>
-            {% for index in cart_data %}
+            {% for index in cart_data%}
                 <div class="card" style="margin-top: 20px;">
                     <div class="card-header">
                         <h5>{{ index.products.name }}</h5>
@@ -31,21 +31,21 @@
                                 <h6>Available : {% if index.products.available %}
                                     <i class="fa fa-check" aria-hidden="true"></i> {% else %}
                                     <i class="fas fa-times"></i>{% endif %}</h6>
-                                <form action="">
-                                    <label >Quantity
-                                    <select name="quantity" id="">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-
-                                    </select>
-                                    </label>
-                                    <a href="{% url 'BigBasket:cart' %}" class="btn btn-outline-primary btn-xs">
-                                        update
-                                    </a>
-                                </form>
+{#                                <form action="">#}
+{#                                    <label >Quantity#}
+{#                                    <select name="quantity" id="">#}
+{#                                        <option value="1">1</option>#}
+{#                                        <option value="2">2</option>#}
+{#                                        <option value="3">3</option>#}
+{#                                        <option value="4">4</option>#}
+{#                                        <option value="5">5</option>#}
+{##}
+{#                                    </select>#}
+{#                                    </label>#}
+{#                                    <a href="{% url 'BigBasket:cart' %}" class="btn btn-outline-primary btn-xs">#}
+{#                                        update#}
+{#                                    </a>#}
+{#                                </form>#}
                             </div>
                         </div>
                     </div>

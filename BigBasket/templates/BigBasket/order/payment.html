@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% load staticfiles %}
+{% block content %}
+    <br>
+    <h3 class="text-center">Confirm Your Order</h3>
+    <div class="container">
+        {% if order_data %}
+            {% for item in order_data %}
+                <div class="card" style="margin-top: 20px;">
+                <div class="card-header">
+                    <h5>Order Number : {{ item.order_number }}</h5>
+                </div>
+                <div class="card-body">
+                    <h6>Product : {{ item.product.name }}</h6>
+                    <h6>Price : ₹ {{ item.product.price }}</h6>
+                </div>
+            {% endfor %}
+            <div class="card-footer text-muted text-left">
+                <strong >Grand Total : ₹{{ total_cost }}</strong><br>
+                <strong >Total Items : {{ total_quantity }}</strong>
+                <div class="text-right">
+                    <a href="{% url 'BigBasket:payment_done' %}">
+                    <button class="btn btn-primary">Make Payment</button>
+                </a>
+                <a href="{% url 'BigBasket:cancel_order' order_number %}">
+                    <button class="btn btn-danger">Cancel</button>
+                </a>
+                </div>
+            </div>
+
+        {% else %}
+
+
+        {% endif %}
+        </div>
+{% endblock %}

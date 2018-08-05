@@ -26,17 +26,22 @@ urlpatterns = [
 	url(r'cart/remove/(?P<product_id>\d+)/$', remove_from_cart,name = 'remove_cart'),
 	url(r'cart/clear/$', clear_cart,name = 'clear_cart'),
 
+	url(r'search/$',search, name='search'),
+	url(r'product/search/(?P<product_slug>[-\w]+)/$', search_product, name='product_search'),
+
 	# url(r'selectAddress/$', DisplayAddress.as_view(), name='select_address'),
 	# path("address/<int:pk>/delete", DeleteAddressView.as_view(), name="address_delete_html"),
 	# path("address/<int:pk>/edit", UpdateAddressView.as_view(), name="address_edit_html"),
 	# url(r'addAddress/$', AddAddress.as_view(),name='add_address'),
 
 	url(r'selectAddress/$', AddressListView.as_view(), name="select_address"),
-    url("address/delete/(?P<address_id>\d+)/$", DeleteAddressView.as_view(), name="delete_address"),
-    url("address/edit/(?P<address_id>\d+)/$", UpdateAddressView.as_view(), name="edit_address"),
+    # url("address/delete/(?P<address_id>\d+)/$", DeleteAddressView.as_view(), name="delete_address"),
+    # url("address/edit/(?P<address_id>\d+)/$", UpdateAddressView.as_view(), name="edit_address"),
     url(r'addAddress/$', CreateAddressView.as_view(), name="add_address"),
 
 	url(r'makeOrder/(?P<address_id>\d+)/$', makeOrder, name='make_order'),
+	url(r'paymentSuccessful', make_payment, name="payment_done"),
+	url(r'cancelOrder/(?P<order_id>\d+)/$', cancelOrder, name='cancel_order'),
 	url(r'orders/$', DisplayOrder.as_view(),name="my_orders"),
 
 	url(r'^$', product_list, name='product_list'),

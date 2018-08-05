@@ -72,14 +72,14 @@ class Checklist(models.Model):
 		return self.products.name
 
 class Address(models.Model):
-	country=models.CharField(max_length=20, null=True, blank=True)
-	fullname=models.CharField(max_length=64, null=True, blank=True)
-	mobileno=models.CharField(max_length=30, null=True, blank=True)
+	fullname = models.CharField(max_length=64, null=True, blank=True)
+	street = models.CharField(max_length=200, null=True, blank=True)
+	landmark = models.CharField(max_length=30, null=True, blank=True)
+	city = models.CharField(max_length=30, null=True, blank=True)
 	pincode=models.CharField(max_length=10, null=True, blank=True)
-	street=models.CharField(max_length=200, null=True, blank=True)
-	landmark=models.CharField(max_length=30, null=True, blank=True)
-	city=models.CharField(max_length=30, null=True, blank=True)
-	state=models.CharField(max_length=30, null=True, blank=True)
+	state = models.CharField(max_length=30, null=True, blank=True)
+	country=models.CharField(max_length=20, null=True, blank=True)
+	mobileno=models.CharField(max_length=30, null=True, blank=True)
 	address_type=models.CharField(max_length=100, null=True, blank=True)
 
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -87,10 +87,12 @@ class Address(models.Model):
 	def  __str__(self):
 		return self.fullname
 
+
 class Order(models.Model):
-	cart= models.ForeignKey(Cart, null=True, blank=True, on_delete=models.CASCADE)
-	total = models.DecimalField(decimal_places=2,max_digits=10)
+	order_number = models.IntegerField(null=True, blank=True)
+	product = models.ForeignKey(Product, null=True, on_delete=models.CASCADE)
 	address = models.ForeignKey(Address,null=True, blank=True, on_delete=models.CASCADE)
+	user = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
 
 	def __str__(self):
-		return self.cart.products.name
+		return self.product.name

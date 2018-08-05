@@ -14,13 +14,13 @@ class AddressForm(forms.ModelForm):
 
         # fields = ('country', 'fullname', 'pincode','street','mobileno','landmark','city','state','address_type' , )
         widgets={
-            'country':forms.TextInput(attrs={'class':'form-control' ,'placeholder':'enter title'  }),
-            'fullname': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter title'}),
-            'mobileno':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter title'}),
-            'pincode': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter title'}),
-            'street': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter title'}),
-            'landmark': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter title'}),
-            'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter title'}),
-            'state': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter title'}),
-            'address_type': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter title'}),
+            'fullname': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter fullname', 'width':'200px'}),
+			'street': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter street'}),
+			'landmark': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter landmark'}),
+			'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter city'}),
+			'pincode': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter pincode'}),
+			'state': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter state'}),
+            'country':forms.TextInput(attrs={'class':'form-control' ,'placeholder':'enter country'  }),
+            'mobileno':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter mobile no'}),
+            'address_type': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'enter address type'}),
         }

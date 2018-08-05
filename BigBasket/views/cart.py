@@ -3,9 +3,13 @@ from BigBasket.models import Product,Cart
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from BigBasket.forms import CartAddProductForm
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import Permission, User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class DisplayCart(ListView):
+class DisplayCart(LoginRequiredMixin, ListView):
+	login_url = '/login/'
 	model = Cart
 
 	context_object_name = 'cart_data'
@@ -13,44 +17,66 @@ class DisplayCart(ListView):
 
 	def get_context_data(self, *, object_list=None, **kwargs):
 		context = super(DisplayCart, self).get_context_data(**kwargs)
-		cost = 0
 		cart = list(Cart.objects.values().filter(user = self.request.user))
 
-		for item in cart:
-			cost = cost + item['subtotal']
+		price = 0
+		for i in cart:
+			product_id = i['products_id']
+			product = Product.objects.get(id=product_id)
+			price += product.price
 
-		context.update({'total':cost})
+
+		context.update({'total':price})
 		return context
+
+	def get_queryset(self):
+		return Cart.objects.filter(user = self.request.user)
 
 
 
 def add_to_cart(request, product_id, quantity=1):
-	user = request.user
-	product = Product.objects.get(pk=product_id)
+	if request.user.is_authenticated:
 
-	try:
-		cart = Cart.objects.get(products = product)
+		user = request.user
+		product = Product.objects.get(pk=product_id)
 
-	except:
-		cost = quantity*product.price
-		cart = Cart(user = user, products = product, quantity=quantity, subtotal=cost)
-		cart.save()
+		try:
+			cart = Cart.objects.get(user = user)
+			if product in list(cart):
+				pass
+			else:
+				cost = quantity * product.price
+				cart = Cart(user=user, products=product, quantity=quantity, subtotal=cost)
+				cart.save()
 
-	return redirect("BigBasket:cart")
+		except:
+			cost = quantity*product.price
+			cart = Cart(user = user, products = product, quantity=quantity, subtotal=cost)
+			cart.save()
+
+		return redirect("BigBasket:cart")
+	else:
+		return redirect('BigBasket:login')
 
 def remove_from_cart(request, product_id):
-	user = request.user
-	cart = Cart.objects.get(products = product_id, user = user)
-	cart.delete()
+	if request.user.is_authenticated:
+		user = request.user
+		cart = Cart.objects.get(products = product_id, user = user)
+		cart.delete()
 
-	return redirect('BigBasket:cart')
+		return redirect('BigBasket:cart')
+	else:
+		return redirect('BigBasket:login')
 
 def clear_cart(request):
-	user = request.user
-	cart = Cart.objects.filter(user = user)
-	cart.delete()
+	if request.user.is_authenticated:
+		user = request.user
+		cart = Cart.objects.filter(user = user)
+		cart.delete()
 
-	return redirect('BigBasket:cart')
+		return redirect('BigBasket:cart')
+	else:
+		return redirect('BigBasket:login')
 
 
 

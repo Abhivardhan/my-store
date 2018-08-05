@@ -32,6 +32,7 @@ class SignUp(View):
                 messages.error(request, 'Invalid Credentials')
                 return redirect('BigBasket:login')
 
+
 class Login(View):
     def get(self,request):
         login =  LoginForm
@@ -55,8 +56,7 @@ class Login(View):
                 return redirect('BigBasket:product_list')
             else:
                 messages.error(request, 'Invalid Credentials')
-                return redirect('BigBasket:product_list')
-
+                return redirect('BigBasket:login')
 
 def logout_view(request):
     logout(request)

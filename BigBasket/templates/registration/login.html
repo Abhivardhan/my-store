@@ -17,20 +17,20 @@
 {% load static %}
 {% block content %}
     <br><br>
-    <div class="jumbotron container">
-        <div class="row ">
-            <div class="col-md-6">
-                <h2>Login</h2>
-                <form method="post" class="form-horizontal">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <br><br><br><br><br>
-                    <button class="btn btn-default" type="submit">Login</button>
-                </form>
+    <div class="jumbotron container text-center" style="width: 400px;">
 
-            </div>
-
+        <div>
+            <h2 class="text-center">Login</h2>
+            <form method="post" class="form-horizontal">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <br><br><br><br><br>
+                <button class="btn btn-default" type="submit">Login</button>
+            </form>
 
         </div>
+
+
     </div>
+
 {% endblock %}

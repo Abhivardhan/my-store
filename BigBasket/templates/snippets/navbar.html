@@ -5,16 +5,16 @@
     <div class="col-lg-3">
         <a class="navbar-brand" href='/'>
 
-            <img src="{% static 'application-images/logo.png' %}" width="300" height="100"
-                 class="d-inline-block align-top" alt="Application Logo"/>
+            <img src="{% static 'application-images/logo.png' %}"
+                 class="d-inline-block align-top" alt="Application Logo" style="width: 300px;height:130px;"/>
         </a>
     </div>
 
 
     <div class="col-lg-6">
-        <form class="form-inline">
+        <form class="form-inline" action="{% url 'BigBasket:search' %}">
 
-            <input class="form-control col-lg-10" type="search" placeholder="Search for Products..">
+            <input class="form-control col-lg-10" type="search" name="q"  placeholder="Search for Products..">
             <div class="input-group-btn">
                 <button class="btn btn-outline-success " type="submit"><i class="fa fa-search"></i></button>
             </div>
@@ -24,14 +24,39 @@
     </div>
     <div class="col-lg-3">
         {% if request.user.is_authenticated %}
-            <span>Hi, <a href="#">{{ user.username }}</a></span>
-            <a href="{% url 'BigBasket:logout' %}">
-                <button class="btn btn-primary btn-outline-primary"> Logout</button>
+            <div class="row">
+                <div class="col-lg-6" style="margin-top: 40px;">
+                    <span>Hi, <a href="#" style="text-transform: capitalize">{{ user.username }}</a></span>
+                    <a href="{% url 'BigBasket:logout' %}">
+                        <button class="btn btn-primary btn-outline-primary"> Logout</button>
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col">
+                        <div class="row-lg-3" style="margin: 2px 0; ">
+                            <a href="{% url 'BigBasket:my_orders' %}">
+                                <button class="btn btn-primary btn-outline-primary"> My Orders</button>
+                            </a>
+                        </div>
+                        <div class="row-lg-3" style="margin: 2px 0;">
+                            <a href="{% url 'BigBasket:cart' %}">
+                                <button class="btn btn-primary btn-outline-primary"> My Basket</button>
+                            </a>
+                        </div>
+                        <div class="row-lg-3" style="margin: 2px 0;">
+                            <a href="{% url 'BigBasket:checklist' %}">
+                                <button class="btn btn-primary btn-outline-primary text-center">Checklist &nbsp;</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            </a>
-            <button class="btn btn-primary btn-outline-primary"> My Orders</button>
-            <a href="{% url 'BigBasket:cart' %}"><button class="btn btn-primary btn-outline-primary"> My Basket</button></a>
-            <a href="{% url 'BigBasket:checklist' %}"><button class="btn btn-primary btn-outline-primary"> Checklist</button></a>
+
+
+
+
+
         {% else %}
             <a class="btn btn-default btn-outline-default" href="{% url 'BigBasket:login' %}">
                 <button class="btn btn-primary btn-outline-primary"><i class="fa fa-user mr-sm-2"></i>Login</button>
